@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Yay Done',
+    date: 'June 3rd, 2020',
+    firstParagraph: 'git add .',
+    secondParagraph: 'git commit',
+    thirdParagraph: 'git push -u origin master'
   }
 ];
 
@@ -111,3 +118,42 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+function articleMaker(articleObject){
+  const article = document.createElement("div");
+  article.classList.add('article');
+
+  const head = document.createElement("h2");
+  const day =  document.createElement("p");
+  const p1 = document.createElement("p");
+  const p2 = document.createElement("p");
+  const p3 = document.createElement("p");
+  const btn = document.createElement("span");
+
+  head.textContent = articleObject.title;
+  day.textContent = articleObject.date;
+  day.classList.add('date');
+  p1.textContent = articleObject.firstParagraph;
+  p2.textContent = articleObject.secondParagraph;
+  p3.textContent = articleObject.thirdParagraph;
+  btn.classList.add('expandButton');
+  btn.textContent = '+';
+  btn.addEventListener('click', (event) => {
+    article.classList.toggle('article-open');
+  })
+
+  article.appendChild(head);
+  article.appendChild(day);
+  article.appendChild(p1);
+  article.appendChild(p2);
+  article.appendChild(p3);
+  article.append(btn);
+
+  return article;
+}
+
+const articles = document.querySelector('.articles');
+
+for (i in data){
+  articles.appendChild(articleMaker(data[i]));
+}
